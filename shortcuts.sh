@@ -75,21 +75,17 @@ end tell'
 sleep 2
 
 
-# extract ngrok urls
-echo "now try to extract them fool"
+# Update the .env file with the new URLs
 
-OUTPUT_PATH=~/Desktop/ngrok_links.txt
+ENV_FILE_PATH=~/Desktop/startup/StayWithMe/.env
 
-NGROK_MAIN_LINK=$(curl -s http://localhost:4040/api/tunnels | grep -o '"public_url":"[^"]*' | cut -d '"' -f 4)
+NGROK_MAIN_URL=$(curl -s http://localhost:4040/api/tunnels | grep -o '"public_url":"[^"]*' | cut -d '"' -f 4)
+NGROK_INSTANCE_URL=$(curl -s http://localhost:4041/api/tunnels | grep -o '"public_url":"[^"]*' | cut -d '"' -f 4)
+NGROK_MEDIA_URL=$(curl -s http://localhost:4042/api/tunnels | grep -o '"public_url":"[^"]*' | cut -d '"' -f 4)
 
-NGROK_INSTANCE_LINK=$(curl -s http://localhost:4041/api/tunnels | grep -o '"public_url":"[^"]*' | cut -d '"' -f 4)
-
-NGROK_MEDIA_LINK=$(curl -s http://localhost:4042/api/tunnels | grep -o '"public_url":"[^"]*' | cut -d '"' -f 4)
-
-
-echo "NGROK_MAIN_LINK=$NGROK_MAIN_LINK" > $OUTPUT_PATH
-echo "NGROK_INSTANCE_LINK=$NGROK_INSTANCE_LINK" >> $OUTPUT_PATH
-echo "NGROK_MEDIA_LINK=$NGROK_MEDIA_LINK" >> $OUTPUT_PATH
+sed -i '' "s|^NGROK_MAIN_URL=.*|NGROK_MAIN_URL=$NGROK_MAIN_URL|" $ENV_FILE_PATH
+sed -i '' "s|^NGROK_INSTANCE_URL=.*|NGROK_INSTANCE_URL=$NGROK_INSTANCE_URL|" $ENV_FILE_PATH
+sed -i '' "s|^NGROK_MEDIA_URL=.*|NGROK_MEDIA_URL=$NGROK_MEDIA_URL|" $ENV_FILE_PATH
 
 
 # to implement -->>
