@@ -74,14 +74,22 @@ end tell'
 
 sleep 2
 
-echo "now try to extract them fool"
+
 # extract ngrok urls
 echo "now try to extract them fool"
-curl -s http://localhost:4040/api/tunnels | grep -o '"public_url":"[^"]*' | cut -d '"' -f 4
 
-curl -s http://localhost:4041/api/tunnels | grep -o '"public_url":"[^"]*' | cut -d '"' -f 4
+OUTPUT_PATH=~/Desktop/ngrok_links.txt
 
-curl -s http://localhost:4042/api/tunnels | grep -o '"public_url":"[^"]*' | cut -d '"' -f 4
+NGROK_MAIN_LINK=$(curl -s http://localhost:4040/api/tunnels | grep -o '"public_url":"[^"]*' | cut -d '"' -f 4)
+
+NGROK_INSTANCE_LINK=$(curl -s http://localhost:4041/api/tunnels | grep -o '"public_url":"[^"]*' | cut -d '"' -f 4)
+
+NGROK_MEDIA_LINK=$(curl -s http://localhost:4042/api/tunnels | grep -o '"public_url":"[^"]*' | cut -d '"' -f 4)
+
+
+echo "NGROK_MAIN_LINK=$NGROK_MAIN_LINK" > $OUTPUT_PATH
+echo "NGROK_INSTANCE_LINK=$NGROK_INSTANCE_LINK" >> $OUTPUT_PATH
+echo "NGROK_MEDIA_LINK=$NGROK_MEDIA_LINK" >> $OUTPUT_PATH
 
 
 # to implement -->>
