@@ -87,13 +87,18 @@ sed -i '' "s|^NGROK_MAIN_URL=.*|NGROK_MAIN_URL=$NGROK_MAIN_URL|" $ENV_FILE_PATH
 sed -i '' "s|^NGROK_INSTANCE_URL=.*|NGROK_INSTANCE_URL=$NGROK_INSTANCE_URL|" $ENV_FILE_PATH
 sed -i '' "s|^NGROK_MEDIA_URL=.*|NGROK_MEDIA_URL=$NGROK_MEDIA_URL|" $ENV_FILE_PATH
 
+sleep 1
 
-# to implement -->>
+osascript -e 'tell application "Terminal"
+    do script "staywithme && python3 run_multiple_instances.py"
+    set miniaturized of front window to true
+    activate
+end tell'
 
-# python3 run_multiple_instances.py
-# export NGROK_URL=<ngrok_url>
-# python3 streamtotwilio.py 3982
+sleep 0.2
 
-
-
-
+osascript -e 'tell application "Terminal"
+    do script "staywithme && python3 streamtotwilio.py 3982"
+    set miniaturized of front window to true
+    activate
+end tell'
