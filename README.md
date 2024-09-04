@@ -1,6 +1,6 @@
 multiple custom commands & shell scripts that are used to start & quit big local projects fast
-repo includes my personal scripts for staywithme, use them as reference
 
+repo includes my personal scripts for staywithme, use them as reference
 
 **INSTURCTION BELOW**
 
